@@ -86,7 +86,8 @@ function onInput(options) {
           input.setSelectionRange(input.value.length, input.value.length);
           let kanaLength = 0;
           for (let index = 0; index < kanaTokens.length; index += 1) {
-            const [, tokenEnd, tokenKana] = kanaTokens[index];
+            const [tokenStart, tokenEnd, maybeTokenKana] = kanaTokens[index];
+            const tokenKana = maybeTokenKana !== null? maybeTokenKana: hiraOrKataString.slice(tokenStart);
             kanaLength += tokenKana.length;
             if (tokenEnd >= selectionEnd) {
               input.setSelectionRange(kanaLength, kanaLength);
